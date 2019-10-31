@@ -3,3 +3,13 @@ export interface User {
   password: string;
   username: string;
 }
+
+export interface Emotion {
+  x: number;
+  y: number;
+}
+
+export interface Emotivoice {
+  sentence: string;
+  emotion: Emotion;
+}

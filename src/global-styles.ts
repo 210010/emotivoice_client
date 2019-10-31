@@ -1,5 +1,6 @@
 import { createGlobalStyle } from './typed-components';
 import { fontSize, color, media } from './config/_mixin';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 export const GlobalStyle = createGlobalStyle`
   /*
     normalize.css - https://necolas.github.io/normalize.css/
@@ -30,10 +31,10 @@ export const GlobalStyle = createGlobalStyle`
   body{
     font-family: 'Nanum Gothic', sans-serif;
     font-size: ${fontSize.normalFontSize};
-    /* background-color: ${color.default.bgColor};
-    color: ${color.default.fontColor}; */
-    background-color: ${color.darkmode.bgColor};
-    color: ${color.darkmode.fontColor};
+    background-color: ${color.default.bgColor};
+    color: ${color.default.fontColor};
+    /* background-color: ${color.darkmode.bgColor};
+    color: ${color.darkmode.fontColor}; */
     ${media.giant} {
       /* Giant View */
     }
