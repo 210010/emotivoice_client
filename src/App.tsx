@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { GlobalStyle } from './global-styles';
 import styled from 'styled-components';
-import { Slider, Icon } from 'antd';
 import { Emotion } from './interfaces';
+import { getAPIManager } from './api';
 
 // This is example of styled-components
 const Container = styled.main`
@@ -55,11 +55,12 @@ const PresetContainer = styled.div`
   margin: 0.5rem 0;
 `;
 
-const PresetButton = styled.button`
+const PresetButton = styled.button<{ toggleState: boolean }>`
   border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 0.2rem;
   padding: 0.25rem 1rem 0.2rem 1rem;
   margin: 0 0.2rem;
+  background-color: ${({ toggleState }) => (toggleState ? '#d1edff' : 'white')};
 `;
 
 const SubmitButton = styled.button`
@@ -95,37 +96,29 @@ const useInput = (initialValue: string, placeholder: string) => {
   return { value, placeholder, onChange };
 };
 
-const useSlider = (initialValue: number, min: number, max: number) => {
-  const [value, setValue] = useState(initialValue);
-  const onChange = (inputValue: any) => {
-    setValue(inputValue);
-  };
-  return { onChange, value, min, max };
+const useSelect = (initialEmotion: Emotion) => {
+  const [emotion, setEmotion] = useState(initialEmotion);
+  return { emotion, setEmotion };
 };
+
+const api = getAPIManager(process.env.REACT_APP_API_HOST);
+api.setupToken();
 
 function App() {
   const toggle = useToggle(false);
   const sentenceProps = useInput('', 'enter the sentence');
-  const initialValue = 0;
-  const minValue = -50;
-  const maxValue = 50;
-  const xProps = useSlider(initialValue, minValue, maxValue);
-  const yProps = useSlider(initialValue, minValue, maxValue);
-  const handleOnSubmit = () => {
-    const result = {
-      emotion: {
-        x: xProps.value,
-        y: yProps.value,
-      },
-      sentence: sentenceProps.value,
-    };
-    console.log(result);
+
+  const selection = useSelect(Emotion.NEUTRAL);
+
+  const [audioURL, setAudioURL] = useState('/');
+  const handleOnSubmit = async () => {
+    const filename = await api.requestTTS(
+      sentenceProps.value,
+      selection.emotion,
+    );
+    setAudioURL(api.getAudioURL(filename));
   };
 
-  const handleOnClickPreset = (emotion: Emotion) => {
-    xProps.onChange(emotion.x);
-    yProps.onChange(emotion.y);
-  };
   return (
     <>
       <GlobalStyle />
@@ -134,31 +127,34 @@ function App() {
           EmotiVoice
         </Header>
         <Textarea {...sentenceProps} />
-        <SliderContainer>
-          <Icon style={{ color: 'black' }} type="frown-o" />
-          <Slider style={{ width: '100%' }} {...xProps} />
-          <Icon style={{ color: 'black' }} type="smile-o" />
-        </SliderContainer>
-        <SliderContainer>
-          <Icon style={{ color: 'black' }} type="man" />
-          <Slider style={{ width: '100%' }} {...yProps} />
-          <Icon style={{ color: 'black' }} type="woman" />
-        </SliderContainer>
         <PresetContainer>
-          <PresetButton onClick={() => handleOnClickPreset({ x: 10, y: 20 })}>
-            Min-su
+          <PresetButton
+            toggleState={selection.emotion === Emotion.NEUTRAL}
+            onClick={() => selection.setEmotion(Emotion.NEUTRAL)}
+          >
+            neutral
           </PresetButton>
-          <PresetButton onClick={() => handleOnClickPreset({ x: -10, y: 20 })}>
-            Joel
+          <PresetButton
+            toggleState={selection.emotion === Emotion.HAPPY}
+            onClick={() => selection.setEmotion(Emotion.HAPPY)}
+          >
+            happy
           </PresetButton>
-          <PresetButton onClick={() => handleOnClickPreset({ x: 10, y: -20 })}>
-            Sung-en
+          <PresetButton
+            toggleState={selection.emotion === Emotion.SAD}
+            onClick={() => selection.setEmotion(Emotion.SAD)}
+          >
+            sad
           </PresetButton>
-          <PresetButton onClick={() => handleOnClickPreset({ x: -10, y: -20 })}>
-            Geon
+          <PresetButton
+            toggleState={selection.emotion === Emotion.ANGRY}
+            onClick={() => selection.setEmotion(Emotion.ANGRY)}
+          >
+            angry
           </PresetButton>
         </PresetContainer>
         <SubmitButton onClick={() => handleOnSubmit()}>Submit</SubmitButton>
+        <audio controls src={audioURL} style={{ marginTop: '10px' }}></audio>
       </Container>
     </>
   );

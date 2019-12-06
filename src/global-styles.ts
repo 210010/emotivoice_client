@@ -64,7 +64,7 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     &:active {
       outline: none;
-      border: none;
+      border-color: transparent;
     }
   }
 
