@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GlobalStyle } from './global-styles';
 import styled from 'styled-components';
 import { Emotion } from './interfaces';
-import { getAPIManager } from './api';
+import { apis } from './api';
 
 // This is example of styled-components
 const Container = styled.main`
@@ -101,24 +101,33 @@ const useSelect = (initialEmotion: Emotion) => {
   return { emotion, setEmotion };
 };
 
-const api = getAPIManager(process.env.REACT_APP_API_HOST);
-api.setupToken();
-
 function App() {
+  const [token, setToken] = useState('');
   const toggle = useToggle(false);
   const sentenceProps = useInput('', 'enter the sentence');
-
   const selection = useSelect(Emotion.NEUTRAL);
-
   const [audioURL, setAudioURL] = useState('/');
   const handleOnSubmit = async () => {
-    const filename = await api.requestTTS(
+    const filename = await apis.requestTTS(
       sentenceProps.value,
       selection.emotion,
+      token,
     );
-    setAudioURL(api.getAudioURL(filename));
+    setAudioURL(getAudioURL(filename));
+  };
+  console.log(apis.requestDemo(token));
+
+  const fetchToken = async () => {
+    const newToken = await apis.getToken();
+    setToken(newToken);
   };
 
+  useEffect(() => {
+    fetchToken();
+  });
+  const getAudioURL = (filename: string): string => {
+    return `${process.env.REACT_APP_API_HOST}/audio?filename=${filename}`;
+  };
   return (
     <>
       <GlobalStyle />
