@@ -115,19 +115,21 @@ function App() {
     );
     setAudioURL(getAudioURL(filename));
   };
-  console.log(apis.requestDemo(token));
 
   const fetchToken = async () => {
     const newToken = await apis.getToken();
     setToken(newToken);
+    console.log(apis.requestDemo(token));
   };
 
   useEffect(() => {
     fetchToken();
-  });
+  }, [setToken]);
+
   const getAudioURL = (filename: string): string => {
     return `${process.env.REACT_APP_API_HOST}/audio?filename=${filename}`;
   };
+
   return (
     <>
       <GlobalStyle />

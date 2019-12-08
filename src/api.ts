@@ -5,10 +5,8 @@ const baseAPI = axios.create({ baseURL });
 
 export const apis = {
   getToken: async () => {
-    const {
-      data: { token },
-    } = await baseAPI.post(`token`);
-    return token;
+    const { data } = await baseAPI.post(`token`);
+    return data;
   },
   requestDemo: async (token: string) => {
     const { data } = await baseAPI.post<string[]>(`demo`, {
