@@ -88,6 +88,7 @@ const PresetButton = styled.button<{ toggleState: boolean }>`
   font-size: 3rem;
   border-radius: 100%;
   transition: 0.5s ease-in-out;
+  background-color: transparent;
   -webkit-filter: ${({ toggleState }) =>
     toggleState ? 'undefined' : 'grayscale(100%)'};
    filter: ${({ toggleState }) =>
