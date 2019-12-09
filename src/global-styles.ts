@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Do Hyeon', sans-serif;
     font-size: ${fontSize.normalFontSize};
     background-color: ${color.default.bgColor};
     color: ${color.default.fontColor};
