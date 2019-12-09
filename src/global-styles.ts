@@ -33,8 +33,6 @@ export const GlobalStyle = createGlobalStyle`
     font-size: ${fontSize.normalFontSize};
     background-color: ${color.default.bgColor};
     color: ${color.default.fontColor};
-    /* background-color: ${color.darkmode.bgColor};
-    color: ${color.darkmode.fontColor}; */
     ${media.giant} {
       /* Giant View */
     }
