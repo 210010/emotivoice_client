@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Song Myung', sans-serif;
     font-size: ${fontSize.normalFontSize};
     background-color: ${color.darkmode.bgColor};
     color: ${color.darkmode.fontColor};

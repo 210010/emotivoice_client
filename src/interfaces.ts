@@ -5,10 +5,18 @@ export interface User {
 }
 
 export enum Emotion {
-  NEUTRAL = 'neutral_000',
-  HAPPY = 'happy_000',
+  NEUTRAL = 'neutral_001',
+  HAPPY = 'happy_004',
+  SAD = 'sad_038',
+  /*
+  84
+  88
+  97
+  */
   ANGRY = 'angry_057',
-  SAD = 'sad_000',
+  /*
+  내일은 시험기간입니다, 나는 매우 화났습니다.
+  */
 }
 
 export interface Audio {

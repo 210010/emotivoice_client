@@ -56,15 +56,27 @@ const Title = styled.div`
   font-size: 2rem;
 `;
 
-const Textarea = styled.input`
+const Textarea = styled.textarea<{ emotion: Emotion }>`
   font-size: 1.2rem;
-  border: none;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
-  min-width: 15rem;
-  text-align: center;
+  min-width: 40rem;
+  min-height: 20rem;
+  text-align: left;
   margin: 0.5rem 0;
   padding-bottom: 0.5rem;
-  background-color: transparent;
+  background: #111;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  transition: 1s ease-in-out;
+  color: ${({ emotion }) =>
+    emotion === Emotion.NEUTRAL
+      ? '#08d406'
+      : emotion === Emotion.HAPPY
+      ? '#ffb646'
+      : emotion === Emotion.SAD
+      ? '#4173bf'
+      : '#ff585f'};
   &:focus {
     outline: none;
   }
@@ -211,7 +223,7 @@ function ActiveExample() {
   return (
     <Container>
       <Title>직접 경험해보세요!</Title>
-      <Textarea {...sentenceProps} />
+      <Textarea {...sentenceProps} emotion={selection.emotion} />
       <PresetContainer>
         <PresetButton
           toggleState={selection.emotion === Emotion.NEUTRAL}
@@ -229,7 +241,7 @@ function ActiveExample() {
           toggleState={selection.emotion === Emotion.SAD}
           onClick={() => selection.setEmotion(Emotion.SAD)}
         >
-          😭
+          🙁
         </PresetButton>
         <PresetButton
           toggleState={selection.emotion === Emotion.ANGRY}
