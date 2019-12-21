@@ -7,7 +7,7 @@ export interface User {
 export enum Emotion {
   NEUTRAL = 'neutral_000',
   HAPPY = 'happy_000',
-  ANGRY = 'angry_000',
+  ANGRY = 'angry_057',
   SAD = 'sad_000',
 }
 

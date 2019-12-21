@@ -26,7 +26,7 @@ function Explanation() {
   return (
     <Container>
       <Title>
-        목소리에 <span style={{ color: 'goldenrod' }}>색</span>을 불어넣다.
+        목소리에 <span style={{ color: '#c79202' }}>색</span>을 불어넣다.
       </Title>
       <Subtitle>감정이 들어간 TTS</Subtitle>
       <Content>(대충 TTS에 감정이 들어갔다는 내용)</Content>

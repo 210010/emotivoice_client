@@ -112,6 +112,7 @@ const SectionWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 2rem 0;
 `;
 
 const AudioListContainer = styled.div`
@@ -138,19 +139,19 @@ function ActiveExample() {
   const [isLoading, setLoading] = useState(false);
   const [token, setToken] = useState('');
   const toggle = useToggle(false);
-  const sentenceProps = useInput('', 'enter the sentence');
+  const sentenceProps = useInput('', '문장을 입력해주세요.');
   const selection = useSelect(Emotion.NEUTRAL);
   const [audioList, setAudioList] = useState<Audio[]>([]);
 
   const columns = [
     {
-      title: 'Sentence',
+      title: '문장',
       dataIndex: 'sentence',
       key: 'sentence',
       align: 'center' as any,
     },
     {
-      title: 'Emotion',
+      title: '감정',
       dataIndex: 'emotion',
       key: 'emotion',
       align: 'center' as any,
@@ -161,7 +162,7 @@ function ActiveExample() {
       ),
     },
     {
-      title: 'Audio',
+      title: '음성파일',
       dataIndex: 'audioURL',
       key: 'audioURL',
       align: 'center' as any,
@@ -238,7 +239,7 @@ function ActiveExample() {
         </PresetButton>
       </PresetContainer>
       <SubmitButton onClick={() => handleOnSubmit()}>
-        {!isLoading ? 'Submit' : <Loading src={LoadingImage} />}
+        {!isLoading ? '음성 만들기' : <Loading src={LoadingImage} />}
       </SubmitButton>
       <SectionWrapper>
         <AudioListContainer>

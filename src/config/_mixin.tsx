@@ -16,7 +16,7 @@ export const websiteTitle = 'react-typescript-template';
 
 export const color = {
   darkmode: {
-    bgColor: '#14181C',
+    bgColor: 'black',
     fontColor: '#ffffff',
     mainColor: '#f6e58d',
   },

@@ -31,8 +31,8 @@ export const GlobalStyle = createGlobalStyle`
   body{
     font-family: 'Do Hyeon', sans-serif;
     font-size: ${fontSize.normalFontSize};
-    background-color: ${color.default.bgColor};
-    color: ${color.default.fontColor};
+    background-color: ${color.darkmode.bgColor};
+    color: ${color.darkmode.fontColor};
     ${media.giant} {
       /* Giant View */
     }
@@ -64,6 +64,9 @@ export const GlobalStyle = createGlobalStyle`
       outline: none;
       border-color: transparent;
     }
+  }
+  .ant-table-content{
+    background: white;
   }
 
   /* animations */
