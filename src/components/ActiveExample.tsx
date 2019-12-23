@@ -41,7 +41,7 @@ const useSelect = (initialEmotion: Emotion) => {
 const emotionToEmoji = {
   [Emotion.NEUTRAL]: '🙂',
   [Emotion.HAPPY]: '😀',
-  [Emotion.SAD]: '😭',
+  [Emotion.SAD]: '🙁',
   [Emotion.ANGRY]: '😡',
 };
 
@@ -88,7 +88,7 @@ const PresetContainer = styled.div`
 
 const Success = styled.img`
   height: 10rem;
-  margin-left: 5rem;
+  margin-left: 2rem;
 `;
 
 const PresetButton = styled.button<{ toggleState: boolean }>`
@@ -161,6 +161,9 @@ function ActiveExample() {
       dataIndex: 'sentence',
       key: 'sentence',
       align: 'center' as any,
+      render: (sentence) => (
+        <span style={{ maxWidth: '15rem' }}>{sentence} </span>
+      ),
     },
     {
       title: '감정',
@@ -183,7 +186,7 @@ function ActiveExample() {
           controls
           autoPlay
           src={audioURL}
-          style={{ marginTop: '10px' }}
+          style={{ marginTop: '10px', width: '20rem' }}
         ></audio>
       ),
     },
@@ -229,25 +232,25 @@ function ActiveExample() {
           toggleState={selection.emotion === Emotion.NEUTRAL}
           onClick={() => selection.setEmotion(Emotion.NEUTRAL)}
         >
-          🙂
+          {emotionToEmoji[Emotion.NEUTRAL]}
         </PresetButton>
         <PresetButton
           toggleState={selection.emotion === Emotion.HAPPY}
           onClick={() => selection.setEmotion(Emotion.HAPPY)}
         >
-          😀
+          {emotionToEmoji[Emotion.HAPPY]}
         </PresetButton>
         <PresetButton
           toggleState={selection.emotion === Emotion.SAD}
           onClick={() => selection.setEmotion(Emotion.SAD)}
         >
-          🙁
+          {emotionToEmoji[Emotion.SAD]}
         </PresetButton>
         <PresetButton
           toggleState={selection.emotion === Emotion.ANGRY}
           onClick={() => selection.setEmotion(Emotion.ANGRY)}
         >
-          😡
+          {emotionToEmoji[Emotion.ANGRY]}
         </PresetButton>
       </PresetContainer>
       <SubmitButton onClick={() => handleOnSubmit()}>
@@ -262,7 +265,6 @@ function ActiveExample() {
             dataSource={audioList}
           />
         </AudioListContainer>
-        <Success src={SuccessImage} />
       </SectionWrapper>
     </Container>
   );

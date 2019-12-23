@@ -67,6 +67,10 @@ export const GlobalStyle = createGlobalStyle`
   }
   .ant-table-content{
     background: white;
+    width: 40rem;
+  }
+  .ant-table{
+    color: black;
   }
 
   /* animations */

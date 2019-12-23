@@ -9,12 +9,12 @@ const Section = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin: 5rem 0;
+  margin: 7rem 0;
 `;
 
 const FancyImage = styled.img`
   height: 10rem;
-  margin: 0 5rem;
+  margin: 0 1rem;
 `;
 
 const Content = styled.div``;
